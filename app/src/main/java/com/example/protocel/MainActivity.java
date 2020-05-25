@@ -6,13 +6,16 @@ import com.jacksonandroidnetworking.JacksonParserFactory;
 
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.OkHttpClient;
+import com.example.protocel.ServerInteractions;
 
 import android.os.Bundle;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("main activity", "aaaa");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AndroidNetworking.initialize(getApplicationContext());
@@ -20,5 +23,8 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         AndroidNetworking.initialize(getApplicationContext(),okHttpClient);
         AndroidNetworking.setParserFactory(new JacksonParserFactory());
+
+        ServerInteractions getHeading = new ServerInteractions();
+        getHeading.get_headings();
     }
 }
