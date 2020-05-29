@@ -20,14 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("main activity", "aaaa");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        AndroidNetworking.initialize(getApplicationContext());
-        OkHttpClient okHttpClient = new OkHttpClient() .newBuilder()
-                .build();
-        AndroidNetworking.initialize(getApplicationContext(),okHttpClient);
-        AndroidNetworking.setParserFactory(new JacksonParserFactory());
-
-        ServerInteractions getHeading = new ServerInteractions();
-        getHeading.get_headings();
+       ServerInteractions serverInteractions = new ServerInteractions();
+       serverInteractions.getProtocols();
     }
 }
