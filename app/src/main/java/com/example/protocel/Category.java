@@ -1,22 +1,41 @@
 package com.example.protocel;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import android.util.Log;
 
-import okhttp3.Protocol;
+import java.util.ArrayList;
+
 
 public class Category {
 
-    public final String name; // Required
-    public final ArrayList<Protocols> protocols; // Optional
-    public final ArrayList<Category> subcategories; // Optional
-    public final boolean isProtocols; // Required
+    // Attributes
+    private final String name; // Required
+    private final ArrayList<Protocols> protocols; // Optional
+    private final ArrayList<Category> subcategories; // Optional
+    private final boolean isProtocols; // Required
 
+    // Initializer
     private Category(CategoryBuilder builder) {
         this.name = builder.name;
         this.protocols = builder.protocols;
         this.subcategories = builder.subcategories;
         this.isProtocols = builder.isProtocols;
+    }
+
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Protocols> getProtocols() {
+        return protocols;
+    }
+
+    public ArrayList<Category> getSubcategories() {
+        return subcategories;
+    }
+
+    public boolean isProtocols() {
+        return isProtocols;
     }
 
 
@@ -25,7 +44,7 @@ public class Category {
         private final String name;
         private ArrayList<Protocols> protocols;
         private ArrayList<Category> subcategories;
-        private boolean isProtocols = false;
+        private boolean isProtocols;
 
         public CategoryBuilder(String name) {
             this.name = name;
@@ -53,8 +72,12 @@ public class Category {
 
         private void validateCategoryObject(Category category) {
             if (category.isProtocols) {
+                Log.e("Category Builder Error",
+                        "Error building category. Subcategories not null");
                 assert category.subcategories == null;
             } else {
+                Log.e("Category Builder Error",
+                        "Error building category. Protocols not null");
                 assert category.protocols == null;
             }
         }
