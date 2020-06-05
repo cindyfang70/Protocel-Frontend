@@ -14,6 +14,10 @@ import android.util.Log;
 import com.androidnetworking.AndroidNetworking;
 import com.jacksonandroidnetworking.JacksonParserFactory;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -21,6 +25,12 @@ public class MainActivity extends AppCompatActivity {
         Log.d("main activity", "aaaa");
         super.onCreate(savedInstanceState);
        ServerInteractions serverInteractions = new ServerInteractions();
-       serverInteractions.getProtocols();
+        try {
+            serverInteractions.getProtocols();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
