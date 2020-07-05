@@ -20,11 +20,10 @@ public class Category {
 
     // Initializer
     public Category(JSONObject data) {
-        this.subcategories = new ArrayList<Category>();
-        this.protocols = new ArrayList<Protocols>();
         try {
             this.name = data.getString("name");
             if (data.has("categories")) {
+                this.subcategories = new ArrayList<Category>();
                 JSONArray categories = data.getJSONArray("categories");
                 int numCats = categories.length();
                 for (int i = 0; i < numCats; i++) {
@@ -32,6 +31,7 @@ public class Category {
                 }
                 this.protocols = null;
             } else if (data.has("protocols")) {
+                this.protocols = new ArrayList<Protocols>();
                 JSONArray protocols = data.getJSONArray("protocols");
                 int numProtocols = protocols.length();
                 for (int j = 0; j < numProtocols; j++) {
