@@ -1,15 +1,29 @@
 package com.example.protocel;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Protocols {
 
-    private final String name;
-    private final String protocolUrl;
+    private String name;
+    private String protocolUrl;
+    private Boolean confirmedInLab;
+    private Boolean confirmedInLiterature;
 
-    public Protocols (String name, String url) {
-        this.name = name;
-        this.protocolUrl = url;
+    public Protocols (JSONObject protocol) {
+        this.confirmedInLab = true;
+        this.confirmedInLiterature = true;
+        try {
+            this.name = protocol.getString("name");
+            this.protocolUrl = protocol.getString("url");
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+
     }
+
 
     public String getName() {
         return name;

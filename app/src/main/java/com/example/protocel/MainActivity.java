@@ -6,7 +6,7 @@ import com.jacksonandroidnetworking.JacksonParserFactory;
 
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.OkHttpClient;
-import com.example.protocel.ServerInteractions;
+//import com.example.protocel.ServerInteractions;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -24,13 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("main activity", "aaaa");
         super.onCreate(savedInstanceState);
-       ServerInteractions serverInteractions = new ServerInteractions();
-        try {
-            serverInteractions.getProtocols();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        RetrieveProtocolTask retrieveProtocol = new RetrieveProtocolTask();
+        retrieveProtocol.execute();
     }
 }
