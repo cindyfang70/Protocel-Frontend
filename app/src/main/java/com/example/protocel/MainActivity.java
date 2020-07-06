@@ -15,16 +15,25 @@ import com.androidnetworking.AndroidNetworking;
 import com.jacksonandroidnetworking.JacksonParserFactory;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("main activity", "aaaa");
         super.onCreate(savedInstanceState);
         RetrieveProtocolTask retrieveProtocol = new RetrieveProtocolTask();
-        retrieveProtocol.execute();
+        try {
+            JSONObject data = retrieveProtocol.execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException err) {
+            err.printStackTrace();
+        }
+
+
     }
 }
