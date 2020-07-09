@@ -25,7 +25,7 @@ public class Login extends AsyncTask<ArrayList<String>, Integer, JSONObject> {
                 .build();
         Request request = new Request.Builder()
                 .header("username", username)
-                .header("token", password)
+                .header("password", password)
                 .url("https://www.philippeyu.ca/login")
                 .post(requestBody)
                 .build();

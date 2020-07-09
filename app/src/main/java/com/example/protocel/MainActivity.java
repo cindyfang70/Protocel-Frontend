@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
                     ArrayList<String> loginInfo = new ArrayList<String>();
                     final TextView emailTextView = findViewById(R.id.email);
                     final TextView passwordTextView = findViewById(R.id.password);
-                    String email = (String)emailTextView.getText();
-                    String password = (String)passwordTextView.getText();
+                    String email = emailTextView.getText().toString();
+                    String password = passwordTextView.getText().toString();
                     loginInfo.add(email);
                     loginInfo.add(password);
                     Login login = new Login();
