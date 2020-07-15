@@ -90,16 +90,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    public void retrieveData(View view, String token){
+    public void retrieveData(int view, String token){
         Intent intent = new Intent(this, OrganismTypeActivity.class);
-//        try {
-//            RetrieveProtocolTask retrieveProtocol = new RetrieveProtocolTask();
-//            JSONObject data = retrieveProtocol.execute().get();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException err) {
-//            err.printStackTrace();
-//        }
+
         intent.putExtra("TOKEN", token);
         startActivity(intent);
     }
