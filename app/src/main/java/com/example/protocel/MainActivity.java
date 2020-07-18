@@ -25,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -72,12 +73,15 @@ public class MainActivity extends AppCompatActivity {
                         alertDialog.show();
                     }
                     else if (loginSuccess){
+                        ArrayList<String> login_info = new ArrayList<String>();
+                        login_info.add(email);
                         try {
-                            retrieveData(R.layout.activity_organism_type, loginResult.getString("token"));
-                        }
-                        catch (JSONException e){
+                            login_info.add(loginResult.getString("token"));
+                        } catch (JSONException e){
                             e.printStackTrace();
                         }
+                        retrieveData(R.layout.activity_organism_type, login_info);
+
                     }
 
                 } catch (ExecutionException e){
@@ -90,10 +94,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    public void retrieveData(int view, String token){
+    public void retrieveData(int view, ArrayList<String> login_info){
         Intent intent = new Intent(this, OrganismTypeActivity.class);
-
-        intent.putExtra("TOKEN", token);
+        intent.putExtra("LOGIN", login_info);
         startActivity(intent);
     }
 }

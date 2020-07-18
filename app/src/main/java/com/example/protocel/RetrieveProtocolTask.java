@@ -20,16 +20,18 @@ import okhttp3.Response;
 import com.example.protocel.Category;
 import com.example.protocel.Protocols;
 
-class RetrieveProtocolTask extends AsyncTask<String, JSONObject, JSONObject> {
+class RetrieveProtocolTask extends AsyncTask<ArrayList<String>, JSONObject, JSONObject> {
 
     @Override
-    protected JSONObject doInBackground(String... strings) {
+    protected JSONObject doInBackground(ArrayList<String>... login_info) {
         OkHttpClient client = new OkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
                 .build();
+        String username = login_info[0].get(0);
+        String token = login_info[0].get(1);
         Request request = new Request.Builder()
-                .header("username", "cindy")
-                .header("token", "50000$owvO1h9w$829b9ce880eedae09a2f696f061c6797bff8f61037a91c904f6bc211c41b3f87")
+                .header("username", username)
+                .header("token", token)
                 .url("https://www.philippeyu.ca/get_protocols")
                 .post(requestBody)
                 .build();

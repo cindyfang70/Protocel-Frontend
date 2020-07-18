@@ -23,14 +23,14 @@ public class LoginHandler {
             } catch (JSONException e){
                 e.printStackTrace();
             }
-            try {
-                RetrieveProtocolTask retrieveProtocol = new RetrieveProtocolTask();
-                JSONObject data = retrieveProtocol.execute().get();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException err) {
-                err.printStackTrace();
-            }
+//            try {
+//                RetrieveProtocolTask retrieveProtocol = new RetrieveProtocolTask();
+//                JSONObject data = retrieveProtocol.execute().get();
+//            } catch (ExecutionException e) {
+//                e.printStackTrace();
+//            } catch (InterruptedException err) {
+//                err.printStackTrace();
+//            }
             return true;
         }
         return false;
