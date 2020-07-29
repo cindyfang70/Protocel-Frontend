@@ -20,8 +20,8 @@ public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.ViewHo
     private ArrayList<String> protocols = new ArrayList<String>();
     private Context mContext;
     public ProtocolAdapter(Context context, ArrayList<String> protocols){
-        mContext = context;
-        protocols = protocols;
+        this.mContext = context;
+        this.protocols = protocols;
     }
     @NonNull
     @Override
@@ -33,6 +33,7 @@ public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.protocolName.setText(protocols.get(position));
         holder.parentLayout.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View view){

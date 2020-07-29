@@ -37,6 +37,7 @@ public class OrganismTypeActivity extends AppCompatActivity {
         organismTypes.add("Prokaryotes");
         organismTypes.add("Eukaryotes");
         ProtocolAdapter adapter = new ProtocolAdapter(this, organismTypes);
+        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
