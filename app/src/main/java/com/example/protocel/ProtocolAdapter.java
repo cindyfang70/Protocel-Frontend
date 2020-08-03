@@ -1,6 +1,7 @@
 package com.example.protocel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,9 +18,9 @@ import java.util.ArrayList;
 
 public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.ViewHolder> {
 
-    private ArrayList<String> protocols = new ArrayList<String>();
+    private ArrayList<Category> protocols = new ArrayList<Category>();
     private Context mContext;
-    public ProtocolAdapter(Context context, ArrayList<String> protocols){
+    public ProtocolAdapter(Context context, ArrayList<Category> protocols){
         this.mContext = context;
         this.protocols = protocols;
     }
@@ -33,14 +34,17 @@ public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.protocolName.setText(protocols.get(position));
+//        holder.protocolName.setText(protocols.get(position));
+        holder.category = protocols.get(position);
         holder.parentLayout.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Log.d("LISTITEM", "clicked");
+                showCategories(holder.category);
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -51,10 +55,16 @@ public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView protocolName;
         RelativeLayout parentLayout;
+        Category category;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             parentLayout = itemView.findViewById(R.id.parent_layout);
             protocolName = itemView.findViewById(R.id.prokaryotes_text);
         }
     }
+    public void showCategories(int view, Category category){
+        Intent intent = new Intent(mContext, CategoryActivity.class);
+        mContext.startActivity(intent);
+    }
+
 }

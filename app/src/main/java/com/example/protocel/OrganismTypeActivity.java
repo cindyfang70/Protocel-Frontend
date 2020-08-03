@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class OrganismTypeActivity extends AppCompatActivity {
-    private ArrayList<String> organismTypes = new ArrayList<>();
+    private Category organismTypes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +23,7 @@ public class OrganismTypeActivity extends AppCompatActivity {
         try {
         RetrieveProtocolTask retrieveProtocol = new RetrieveProtocolTask();
         JSONObject data = retrieveProtocol.execute(login_info).get();
+        organismTypes = new Category(data);
 
         }  catch (ExecutionException e) {
             e.printStackTrace();
@@ -34,8 +35,6 @@ public class OrganismTypeActivity extends AppCompatActivity {
 
     private void initRecyclerView(){
         RecyclerView recyclerView = findViewById(R.id.organism_recycler_view);
-        organismTypes.add("Prokaryotes");
-        organismTypes.add("Eukaryotes");
         ProtocolAdapter adapter = new ProtocolAdapter(this, organismTypes);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
