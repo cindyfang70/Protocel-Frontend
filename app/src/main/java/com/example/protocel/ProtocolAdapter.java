@@ -33,14 +33,15 @@ public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 //        holder.protocolName.setText(protocols.get(position));
         holder.category = protocols.get(position);
         holder.parentLayout.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Log.d("LISTITEM", "clicked");
-                showCategories(holder.category);
+                final ViewHolder v = holder;
+                showCategories(v.category);
             }
         });
     }
@@ -62,9 +63,9 @@ public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.ViewHo
             protocolName = itemView.findViewById(R.id.prokaryotes_text);
         }
     }
-    public void showCategories(ArrayList<Category> protocols){
+    public void showCategories(Category subcategory){
         Intent intent = new Intent(mContext, CategoryActivity.class);
-        intent.putExtra("PROTOCOLS", protocols);
+        intent.putExtra("SUBCATEGORY", subcategory);
         mContext.startActivity(intent);
     }
 
