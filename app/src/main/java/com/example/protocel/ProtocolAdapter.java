@@ -62,8 +62,9 @@ public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.ViewHo
             protocolName = itemView.findViewById(R.id.prokaryotes_text);
         }
     }
-    public void showCategories(int view, Category category){
+    public void showCategories(ArrayList<Category> protocols){
         Intent intent = new Intent(mContext, CategoryActivity.class);
+        intent.putExtra("PROTOCOLS", protocols);
         mContext.startActivity(intent);
     }
 
