@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -48,10 +49,15 @@ public class Category implements Serializable {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
     }
 
+    /// Only to be used when initializing a top level category i.e. eukaryotes, prokaryotes
+    public Category(String name, ArrayList<Category> subCats) {
+        this.name = name;
+        this.subcategories = new ArrayList<Category>();
+        this.subcategories.addAll(subCats);
+        this.isProtocols = false;
+    }
 
     // Getters
     public String getName() {

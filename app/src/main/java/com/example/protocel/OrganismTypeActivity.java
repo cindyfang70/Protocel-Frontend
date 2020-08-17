@@ -7,13 +7,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.concurrent.ExecutionException;
 
 public class OrganismTypeActivity extends AppCompatActivity {
-    private Category organismTypes;
+    private ArrayList<Category> organismTypes = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +28,35 @@ public class OrganismTypeActivity extends AppCompatActivity {
         ArrayList<String> login_info = intent.getStringArrayListExtra("LOGIN");
         try {
         RetrieveProtocolTask retrieveProtocol = new RetrieveProtocolTask();
-        JSONObject data = retrieveProtocol.execute(login_info).get();
-        organismTypes = new Category(data);
+        JSONObject allData = retrieveProtocol.execute(login_info).get();
+
+        // Iterate through all the keys for the top level of the data, and add the categories to it
+        for (Iterator<String> it = allData.keys(); it.hasNext(); ) {
+            String key = it.next();
+            ArrayList<Category> newCats = new ArrayList<>();
+            // Add the subcategories
+            try {
+                JSONObject cellType = allData.getJSONObject(key);
+                JSONArray categories = cellType.getJSONArray("categories");
+                for (int i = 0; i < categories.length(); i++) {
+                    JSONObject index = categories.getJSONObject(i);
+                    newCats.add(new Category(index));
+                }
+                this.organismTypes.add(new Category(key, newCats));
+            }  catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            // Add something for this key to organismTypes
+            try {
+                JSONObject type = allData.getJSONObject(key);
+                JSONObject categories = type.getJSONObject(key);
+                organismTypes.add(new Category((categories)));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
         }  catch (ExecutionException e) {
             e.printStackTrace();

@@ -2,7 +2,6 @@ package com.example.protocel;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,17 +11,16 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.protocel.ProtocolHolder;
 
 import java.util.ArrayList;
 
 public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.ViewHolder> {
 
-    private ArrayList<Category> protocols = new ArrayList<Category>();
+    private ArrayList<Category> categories = new ArrayList<Category>();
     private Context mContext;
-    public ProtocolAdapter(Context context, ArrayList<Category> protocols){
+    public ProtocolAdapter(Context context, ArrayList<Category> categories){
         this.mContext = context;
-        this.protocols = protocols;
+        this.categories.addAll(categories);
     }
     @NonNull
     @Override
@@ -34,8 +32,10 @@ public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-//        holder.protocolName.setText(protocols.get(position));
-        holder.category = protocols.get(position);
+        Category cat = categories.get(position);
+        holder.protocolName.setText(cat.getName());
+        holder.category = cat;
+        holder.category = categories.get(position);
         holder.parentLayout.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -49,7 +49,7 @@ public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return protocols.size();
+        return categories.size();
     }
 
 
