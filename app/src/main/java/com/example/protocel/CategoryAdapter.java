@@ -1,6 +1,7 @@
 package com.example.protocel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,19 +32,25 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final CategoryViewHolder holder, int position) {
         Category cat = categories.get(position);
         holder.protocolName.setText(cat.getName());
         holder.category = cat;
         holder.category = categories.get(position);
-//        holder.parentLayout.setOnClickListener( new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view){
-//                Log.d("LISTITEM", "clicked");
-//                final CategoryAdapter.CategoryViewHolder v = holder;
-//                //showCategories(v.category);
-//            }
-//        });
+        holder.parentLayout.setOnClickListener( new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Log.d("LISTITEM", "clicked");
+                final CategoryAdapter.CategoryViewHolder v = holder;
+                showCategories(v.category);
+            }
+        });
+    }
+
+    public void showCategories(Category subcategory){
+        Intent intent = new Intent(mContext, CategoryActivity.class);
+        intent.putExtra("SUBCATEGORY", subcategory);
+        mContext.startActivity(intent);
     }
 
     @Override

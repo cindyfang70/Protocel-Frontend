@@ -50,6 +50,5 @@ public class CategoryActivity extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
         }
-
     }
 }
