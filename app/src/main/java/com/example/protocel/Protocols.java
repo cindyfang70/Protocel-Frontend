@@ -4,7 +4,9 @@ package com.example.protocel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Protocols {
+import java.io.Serializable;
+
+public class Protocols implements Serializable {
 
     private String name;
     private String protocolUrl;

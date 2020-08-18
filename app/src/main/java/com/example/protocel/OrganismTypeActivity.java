@@ -32,10 +32,13 @@ public class OrganismTypeActivity extends AppCompatActivity {
 
         // Iterate through all the keys for the top level of the data, and add the categories to it
         for (Iterator<String> it = allData.keys(); it.hasNext(); ) {
+            // Get the key for this index
             String key = it.next();
             ArrayList<Category> newCats = new ArrayList<>();
             // Add the subcategories
             try {
+                // We want to get the individual category/protocol objects,
+                // so we have to get down to it
                 JSONObject cellType = allData.getJSONObject(key);
                 JSONArray categories = cellType.getJSONArray("categories");
                 for (int i = 0; i < categories.length(); i++) {

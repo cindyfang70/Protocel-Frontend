@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject loginResult = login.execute(loginInfo).get();
                     LoginHandler loginHandler = new LoginHandler();
                     boolean loginSuccess = loginHandler.checkResponse(loginResult);
-                    if (loginSuccess == false) {
+                    if (!loginSuccess) {
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
 
                         final EditText et = new EditText(MainActivity.this);
