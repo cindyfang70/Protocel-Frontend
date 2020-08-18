@@ -9,62 +9,64 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.ProtocolViewHolder> {
+import java.util.ArrayList;
 
-    ArrayList<Protocols> protocols = new ArrayList<>();
+public class OrganismAdapter extends RecyclerView.Adapter<OrganismAdapter.ViewHolder> {
+
+    private ArrayList<Category> categories = new ArrayList<Category>();
     private Context mContext;
-    public ProtocolAdapter(Context context, ArrayList<Protocols> protocols){
+    public OrganismAdapter(Context context, ArrayList<Category> categories){
         this.mContext = context;
-        this.protocols.addAll(protocols);
+        this.categories.addAll(categories);
     }
-
     @NonNull
     @Override
-    public ProtocolViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.protocol_listitem, parent, false);
-        ProtocolAdapter.ProtocolViewHolder viewHolder = new ProtocolAdapter.ProtocolViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ProtocolViewHolder holder, int position) {
-        Protocols cat = protocols.get(position);
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        Category cat = categories.get(position);
         holder.protocolName.setText(cat.getName());
-        holder.protocol = cat;
+        holder.category = cat;
+        holder.category = categories.get(position);
         holder.parentLayout.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 Log.d("LISTITEM", "clicked");
-                final ProtocolAdapter.ProtocolViewHolder v = holder;
-                showCategories(v.protocol);
+                final ViewHolder v = holder;
+                showCategories(v.category);
             }
         });
     }
 
-    public void showCategories(Protocols protocol){
-//        Intent intent = new Intent(mContext, CategoryActivity.class);
-//        intent.putExtra("SUBCATEGORY", subcategory);
-//        mContext.startActivity(intent);
-    }
 
     @Override
     public int getItemCount() {
-        return this.protocols.size();
+        return categories.size();
     }
 
-    public class ProtocolViewHolder extends RecyclerView.ViewHolder {
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView protocolName;
         RelativeLayout parentLayout;
-        Protocols protocol;
-        public ProtocolViewHolder(@NonNull View itemView) {
+        Category category;
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             parentLayout = itemView.findViewById(R.id.parent_layout);
             protocolName = itemView.findViewById(R.id.prokaryotes_text);
         }
     }
+    public void showCategories(Category subcategory){
+        Intent intent = new Intent(mContext, CategoryActivity.class);
+        intent.putExtra("SUBCATEGORY", subcategory);
+        mContext.startActivity(intent);
+    }
+
 }

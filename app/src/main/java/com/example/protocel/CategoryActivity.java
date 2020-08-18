@@ -3,6 +3,7 @@ package com.example.protocel;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import okhttp3.Protocol;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,9 +43,9 @@ public class CategoryActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.categoryRecyclerView);
 
         if (this.isProtocols) {
-//            CategoryAdapter adapter = new CategoryAdapter(this, organismTypes);
-//            recyclerView.setAdapter(adapter);
-//            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            ProtocolAdapter adapter = new ProtocolAdapter(this, protocols);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
         } else {
             CategoryAdapter adapter = new CategoryAdapter(this, this.categories);
             recyclerView.setAdapter(adapter);
