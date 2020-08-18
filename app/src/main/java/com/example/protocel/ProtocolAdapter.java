@@ -47,9 +47,9 @@ public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.Protoc
     }
 
     public void showCategories(Protocols protocol){
-//        Intent intent = new Intent(mContext, CategoryActivity.class);
-//        intent.putExtra("SUBCATEGORY", subcategory);
-//        mContext.startActivity(intent);
+        Intent intent = new Intent(mContext, ProtocolActivity.class);
+        intent.putExtra("PROTOCOL", protocol);
+        mContext.startActivity(intent);
     }
 
     @Override
