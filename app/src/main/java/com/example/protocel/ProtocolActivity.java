@@ -32,7 +32,7 @@ public class ProtocolActivity extends AppCompatActivity {
         this.webView = findViewById(R.id.protocolWebView);
 
         // Setup the web view and load the data
-        this.webView.setWebViewClient(new ProtocolWebViewClient());
+        this.webView.setWebViewClient(new ProtocolWebViewClient(this));
         Map<String, String> map = new HashMap<>();
         map.put("username", "spongebob");
         map.put("token", "token");
