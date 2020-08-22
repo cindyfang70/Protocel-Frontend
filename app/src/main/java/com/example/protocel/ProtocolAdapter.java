@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -26,7 +27,7 @@ public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.Protoc
     @NonNull
     @Override
     public ProtocolViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.protocol_listitem, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.protocol_verificationimages, parent, false);
         ProtocolAdapter.ProtocolViewHolder viewHolder = new ProtocolAdapter.ProtocolViewHolder(view);
         return viewHolder;
     }
@@ -61,10 +62,14 @@ public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.Protoc
         TextView protocolName;
         RelativeLayout parentLayout;
         Protocols protocol;
+        ImageView testtubeImage;
+        ImageView bookImage;
         public ProtocolViewHolder(@NonNull View itemView) {
             super(itemView);
             parentLayout = itemView.findViewById(R.id.parent_layout);
-            protocolName = itemView.findViewById(R.id.prokaryotes_text);
+            protocolName = itemView.findViewById(R.id.protocol_images);
+            testtubeImage = itemView.findViewById(R.id.testtube_icon);
+            bookImage = itemView.findViewById(R.id.book_icon);
         }
     }
 }
