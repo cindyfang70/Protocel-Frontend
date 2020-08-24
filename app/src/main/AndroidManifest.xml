@@ -12,7 +12,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="ExtraText">
-        <activity android:name=".CategoryActivity"></activity>
+        <activity
+            android:name=".ButtonsActivity"
+            android:label="@string/title_activity_buttons"></activity>
+        <activity android:name=".CategoryActivity" />
         <activity android:name=".OrganismTypeActivity" />
         <activity android:name=".ProtocolActivity" />
         <activity android:name=".MainActivity">
