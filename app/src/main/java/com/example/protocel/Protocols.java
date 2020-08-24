@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
-public class Protocols implements Serializable {
+public class Protocols implements Serializable, Searchable {
 
     private String name;
     private String protocolUrl;

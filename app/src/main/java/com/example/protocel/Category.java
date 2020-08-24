@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 
-public class Category implements Serializable {
+public class Category implements Serializable, Searchable {
 
     // Attributes
     private String name; // Required
