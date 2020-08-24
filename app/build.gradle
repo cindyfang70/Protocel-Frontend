@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.protocel"
-        minSdkVersion 25
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -32,4 +32,5 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.amitshekhar.android:jackson-android-networking:1.0.2'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }
