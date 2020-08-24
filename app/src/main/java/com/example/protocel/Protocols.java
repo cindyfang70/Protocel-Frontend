@@ -14,7 +14,7 @@ public class Protocols implements Serializable {
     private Boolean confirmedInLiterature;
 
     public Protocols (JSONObject protocol) {
-        this.confirmedInLab = true;
+        this.confirmedInLab = false;
         this.confirmedInLiterature = true;
         try {
             this.name = protocol.getString("name");
@@ -30,6 +30,9 @@ public class Protocols implements Serializable {
     public String getName() {
         return name;
     }
+
+    public boolean getLabConfirmation(){return this.confirmedInLab;}
+    public boolean getLiteratureConfirmation(){return this.confirmedInLiterature;}
 
     public String getProtocolUrl() {
         return protocolUrl;

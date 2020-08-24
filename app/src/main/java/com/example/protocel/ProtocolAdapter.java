@@ -37,6 +37,12 @@ public class ProtocolAdapter extends RecyclerView.Adapter<ProtocolAdapter.Protoc
         Protocols cat = protocols.get(position);
         holder.protocolName.setText(cat.getName());
         holder.protocol = cat;
+        if (!holder.protocol.getLabConfirmation()){
+            holder.testtubeImage.setVisibility(View.INVISIBLE);
+        }
+        if (!holder.protocol.getLiteratureConfirmation()) {
+            holder.bookImage.setVisibility(View.INVISIBLE);
+        }
         holder.parentLayout.setOnClickListener( new View.OnClickListener(){
             @Override
             public void onClick(View view){
