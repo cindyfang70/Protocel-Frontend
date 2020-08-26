@@ -31,9 +31,9 @@ public class OrganismTypeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organism_type);
         Intent intent = getIntent();
-        ArrayList<String> login_info = intent.getStringArrayListExtra("LOGIN");
+        final ArrayList<String> login_info = intent.getStringArrayListExtra("LOGIN");
         try {
-        RetrieveProtocolTask retrieveProtocol = new RetrieveProtocolTask();
+        RetrieveProtocolTask retrieveProtocol = new RetrieveProtocolTask(OrganismTypeActivity.this);
         JSONObject allData = retrieveProtocol.execute(login_info).get();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation_view);
@@ -44,6 +44,7 @@ public class OrganismTypeActivity extends AppCompatActivity {
                     case R.id.navigation_home:
                         Toast.makeText(OrganismTypeActivity.this, "Home", Toast.LENGTH_SHORT).show();
                         Intent homeIntent = new Intent(OrganismTypeActivity.this, OrganismTypeActivity.class);
+                        homeIntent.putExtra("LOGIN", login_info);
                         startActivity(homeIntent);
                         break;
                     case R.id.navigation_favourites:

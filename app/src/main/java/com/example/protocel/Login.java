@@ -1,12 +1,15 @@
 package com.example.protocel;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Base64;
 
@@ -17,6 +20,11 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class Login extends AsyncTask<ArrayList<String>, Integer, JSONObject> {
+    private final Context mcontext;
+    public Login(final Context context){
+        super();
+        mcontext = context;
+    }
     @Override
     protected JSONObject doInBackground(ArrayList<String> ...login_info){
         String username = login_info[0].get(0);
@@ -25,8 +33,11 @@ public class Login extends AsyncTask<ArrayList<String>, Integer, JSONObject> {
         String originalString = username + ":" + password;
         String encodedString = encoder.encodeToString(originalString.getBytes());
 
-        String authToken = "Basic " + encodedString;
+        String LOGIN_FILE = "login.txt";
 
+
+        String authToken = "Basic " + encodedString;
+        writeToFile(username, encodedString, LOGIN_FILE, mcontext);
 
         OkHttpClient client = new OkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
@@ -58,6 +69,19 @@ public class Login extends AsyncTask<ArrayList<String>, Integer, JSONObject> {
             e.printStackTrace();
         }
         return null;
+    }
+    private void writeToFile(String username, String authToken, String FILE_NAME, Context context) {
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = context.openFileOutput(FILE_NAME, context.MODE_PRIVATE);
+            fileOutputStream.write(username.getBytes());
+            fileOutputStream.write(":".getBytes());
+            fileOutputStream.write(authToken.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 }
