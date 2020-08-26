@@ -1,9 +1,11 @@
 package com.example.protocel;
 import com.androidnetworking.AndroidNetworking;
 import com.facebook.stetho.Stetho;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jacksonandroidnetworking.JacksonParserFactory;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.OkHttpClient;
 //import com.example.protocel.ServerInteractions;
@@ -13,10 +15,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.jacksonandroidnetworking.JacksonParserFactory;
@@ -35,6 +39,35 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
+
+        //setting up bottom navigation bar
+//        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation_view);
+//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId()) {
+//                    case R.id.navigation_home:
+//                        Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+//                        Intent homeIntent = new Intent(MainActivity.this, OrganismTypeActivity.class);
+//                        startActivity(homeIntent);
+//                        break;
+//                    case R.id.navigation_favourites:
+//                        Toast.makeText(MainActivity.this, "Favorites", Toast.LENGTH_SHORT).show();
+//                        Intent favouritesIntent = new Intent(MainActivity.this, FavouritesActivity.class);
+//                        startActivity(favouritesIntent);
+//                        break;
+//                    case R.id.navigation_recents:
+//                        Toast.makeText(MainActivity.this, "Recents", Toast.LENGTH_SHORT).show();
+//                        Intent recentsIntent = new Intent(MainActivity.this, RecentsActivity.class);
+//                        startActivity(recentsIntent);
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
+
+
+
         final Button loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

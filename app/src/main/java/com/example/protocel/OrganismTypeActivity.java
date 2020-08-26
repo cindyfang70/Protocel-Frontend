@@ -43,12 +43,18 @@ public class OrganismTypeActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
                         Toast.makeText(OrganismTypeActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                        Intent homeIntent = new Intent(OrganismTypeActivity.this, OrganismTypeActivity.class);
+                        startActivity(homeIntent);
                         break;
                     case R.id.navigation_favourites:
                         Toast.makeText(OrganismTypeActivity.this, "Favorites", Toast.LENGTH_SHORT).show();
+                        Intent favouritesIntent = new Intent(OrganismTypeActivity.this, FavouritesActivity.class);
+                        startActivity(favouritesIntent);
                         break;
                     case R.id.navigation_recents:
                         Toast.makeText(OrganismTypeActivity.this, "Recents", Toast.LENGTH_SHORT).show();
+                        Intent recentsIntent = new Intent(OrganismTypeActivity.this, RecentsActivity.class);
+                        startActivity(recentsIntent);
                         break;
                 }
                 return true;

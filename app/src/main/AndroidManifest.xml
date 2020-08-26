@@ -12,6 +12,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="ExtraText">
+        <activity android:name=".RecentsActivity"></activity>
+        <activity android:name=".FavouritesActivity" />
         <activity android:name=".CategoryActivity" />
         <activity android:name=".OrganismTypeActivity" />
         <activity android:name=".ProtocolActivity" />
