@@ -1,9 +1,11 @@
 package com.example.protocel;
 import com.androidnetworking.AndroidNetworking;
 import com.facebook.stetho.Stetho;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jacksonandroidnetworking.JacksonParserFactory;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.OkHttpClient;
 //import com.example.protocel.ServerInteractions;
@@ -13,10 +15,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.jacksonandroidnetworking.JacksonParserFactory;
@@ -48,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     String password = passwordTextView.getText().toString();
                     loginInfo.add(email);
                     loginInfo.add(password);
-                    Login login = new Login();
+                    Login login = new Login(MainActivity.this);
                     JSONObject loginResult = login.execute(loginInfo).get();
                     LoginHandler loginHandler = new LoginHandler();
                     boolean loginSuccess = loginHandler.checkResponse(loginResult);

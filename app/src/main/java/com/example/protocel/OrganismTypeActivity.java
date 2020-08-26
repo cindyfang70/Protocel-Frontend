@@ -1,11 +1,20 @@
 package com.example.protocel;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,10 +31,36 @@ public class OrganismTypeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organism_type);
         Intent intent = getIntent();
-        ArrayList<String> login_info = intent.getStringArrayListExtra("LOGIN");
+        final ArrayList<String> login_info = intent.getStringArrayListExtra("LOGIN");
         try {
-        RetrieveProtocolTask retrieveProtocol = new RetrieveProtocolTask();
+        RetrieveProtocolTask retrieveProtocol = new RetrieveProtocolTask(OrganismTypeActivity.this);
         JSONObject allData = retrieveProtocol.execute(login_info).get();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation_view);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        Toast.makeText(OrganismTypeActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                        Intent homeIntent = new Intent(OrganismTypeActivity.this, OrganismTypeActivity.class);
+                        homeIntent.putExtra("LOGIN", login_info);
+                        startActivity(homeIntent);
+                        break;
+                    case R.id.navigation_favourites:
+                        Toast.makeText(OrganismTypeActivity.this, "Favorites", Toast.LENGTH_SHORT).show();
+                        Intent favouritesIntent = new Intent(OrganismTypeActivity.this, FavouritesActivity.class);
+                        startActivity(favouritesIntent);
+                        break;
+                    case R.id.navigation_recents:
+                        Toast.makeText(OrganismTypeActivity.this, "Recents", Toast.LENGTH_SHORT).show();
+                        Intent recentsIntent = new Intent(OrganismTypeActivity.this, RecentsActivity.class);
+                        startActivity(recentsIntent);
+                        break;
+                }
+                return true;
+            }
+        });
 
         // Iterate through all the keys for the top level of the data, and add the categories to it
         for (Iterator<String> it = allData.keys(); it.hasNext(); ) {
