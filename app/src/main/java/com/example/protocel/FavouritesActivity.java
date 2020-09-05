@@ -16,6 +16,9 @@ public class FavouritesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
+        Intent intent = getIntent();
+
+        //setting up bottom navigation bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -40,5 +43,8 @@ public class FavouritesActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
+
     }
 }
