@@ -7,16 +7,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.googlecode.concurrenttrees.radix.ConcurrentRadixTree;
+import com.googlecode.concurrenttrees.radix.node.Node;
+import com.googlecode.concurrenttrees.radix.node.NodeFactory;
+import com.googlecode.concurrenttrees.radix.node.concrete.DefaultCharArrayNodeFactory;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class OrganismTypeActivity extends AppCompatActivity {
     private ArrayList<Category> organismTypes = new ArrayList<>();
+    private ConcurrentRadixTree searchTree = new ConcurrentRadixTree(new DefaultCharArrayNodeFactory());
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +70,7 @@ public class OrganismTypeActivity extends AppCompatActivity {
         } catch (InterruptedException err) {
             err.printStackTrace();
         }
+        initializeTree();
         initRecyclerView();
     }
 
@@ -71,5 +79,28 @@ public class OrganismTypeActivity extends AppCompatActivity {
         OrganismAdapter adapter = new OrganismAdapter(this, organismTypes);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void initializeTree() {
+        for (Category c:
+             this.organismTypes) {
+            addCategoryToTree(c);
+        }
+    }
+
+
+    private void addCategoryToTree(Category cat) {
+        this.searchTree.put(cat.getName(), cat);
+        if (cat.isProtocols()) {
+            for (Protocols p:
+                 cat.getProtocols()) {
+                this.searchTree.put(p.getName(), p);
+            }
+        } else {
+            for (Category c:
+                 cat.getSubcategories()) {
+                this.addCategoryToTree(c);
+            }
+        }
     }
 }
