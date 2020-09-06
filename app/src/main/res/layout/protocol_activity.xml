@@ -7,12 +7,12 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:contentInsetStart="350dp"
+        app:contentInsetStart="300dp"
         app:menu="@menu/favourite_protocol">
 
         <ImageButton
@@ -20,7 +20,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/favourite_image"
+            android:scrollbarDefaultDelayBeforeFade="400"
             app:srcCompat="@drawable/heart_image" />
+
+        <ImageButton
+            android:id="@+id/action_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/action_sort"
+            app:srcCompat="@drawable/sort_icon" />
 
     </androidx.appcompat.widget.Toolbar>
 
