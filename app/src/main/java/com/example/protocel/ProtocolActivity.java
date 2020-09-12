@@ -106,6 +106,7 @@ public class ProtocolActivity extends AppCompatActivity {
                         });
                     }
                 });
+                break;
             case R.id.action_sort:
                 OkHttpClient sort_client = new OkHttpClient();
                 RequestBody sort_requestBody = new FormBody.Builder()
