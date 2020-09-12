@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".FavouritesActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favorites_activity_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation_view"
         android:layout_width="0dp"
