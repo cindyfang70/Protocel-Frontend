@@ -28,8 +28,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/organismtype_toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="412dp"
+        android:layout_height="62dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -40,13 +40,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:menu="@menu/sort_protocols">
-
-        <ImageButton
-            android:id="@+id/action_sort"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/action_sort"
-            app:srcCompat="@drawable/sort_icon" />
-    </androidx.appcompat.widget.Toolbar>
+        app:menu="@menu/sort_protocols" />
 </androidx.constraintlayout.widget.ConstraintLayout>
