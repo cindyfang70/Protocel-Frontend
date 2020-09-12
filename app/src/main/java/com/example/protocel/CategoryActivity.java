@@ -104,6 +104,7 @@ public class CategoryActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.sort_protocols, menu);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         return true;
     }
     @Override
