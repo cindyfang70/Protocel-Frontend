@@ -6,11 +6,13 @@
     android:layout_height="match_parent"
     android:id="@+id/recycler_layout">
 
+    \
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/protcol_row_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="RecyclerView" />\
+        android:text="RecyclerView" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -22,20 +24,20 @@
         app:contentInsetStart="300dp"
         app:menu="@menu/favourite_protocol">
 
-    <ImageButton
-        android:id="@+id/action_favorite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/favourite_image"
-        android:scrollbarDefaultDelayBeforeFade="400"
-        app:srcCompat="@drawable/heart_image" />
+        <ImageButton
+            android:id="@+id/action_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/favourite_image"
+            android:scrollbarDefaultDelayBeforeFade="400"
+            app:srcCompat="@drawable/heart_image" />
 
-    <ImageButton
-        android:id="@+id/action_sort"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/action_sort"
-        app:srcCompat="@drawable/sort_icon" />
+        <ImageButton
+            android:id="@+id/action_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/action_sort"
+            app:srcCompat="@drawable/sort_icon" />
     </androidx.appcompat.widget.Toolbar>
 
 </LinearLayout>

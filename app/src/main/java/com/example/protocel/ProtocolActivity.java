@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -38,6 +41,9 @@ public class ProtocolActivity extends AppCompatActivity {
 
     Protocols referencingProtocol;
     WebView webView;
+    private Menu menu;
+    Handler uiHandler;
+    boolean isLiked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,54 +64,72 @@ public class ProtocolActivity extends AppCompatActivity {
         map.put("token", "token");
         String protocolURL = "https://www.philippeyu.ca/protocols/README";
         this.webView.loadUrl(protocolURL, map);
+        this.uiHandler = new Handler();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.favourite_protocol, menu);
+        this.menu = menu;
         return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         ReadLoginFromFile readLogin = new ReadLoginFromFile();
-        String info = readLogin.readFromFile(ProtocolActivity.this);
-        String[] split_info = info.split(":");
-        String username = split_info[0];
-        username = username.replace("\n", "");
-        String token = split_info[1];
+        final String info = readLogin.readFromFile(ProtocolActivity.this);
+        final String[] split_info = info.split(":");
+        final String username = split_info[0].replace("\n", "");
+        final String token = split_info[1];
         switch (item.getItemId()) {
             case R.id.action_favorite:
-                OkHttpClient client = new OkHttpClient();
-                RequestBody requestBody = new FormBody.Builder()
-                        .build();
-                Request request = new Request.Builder()
-                        .header("token", token)
-                        .header("protocol", referencingProtocol.getName())
-                        .header("username", username)
-                        .url("https://www.philippeyu.ca/like_protocol")
-                        .post(requestBody)
-                        .build();
-                client.newCall(request).enqueue(new Callback() {
-                    Handler mainHandler = new Handler(ProtocolActivity.this.getMainLooper());
-                    @Override
-                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                        mainHandler.post(new Runnable(){
-                            @Override
-                            public void run() {
-                                Toast.makeText(ProtocolActivity.this, "Failed to add to Favourites", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
 
+                new Thread(new Runnable() {
                     @Override
-                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                        mainHandler.post(new Runnable(){
+                    public void run () {
+                        OkHttpClient client = new OkHttpClient();
+                        RequestBody requestBody = new FormBody.Builder()
+                                .build();
+                        Request request = new Request.Builder()
+                                .header("token", token)
+                                .header("protocol", referencingProtocol.getName())
+                                .header("username", username)
+                                .url("https://www.philippeyu.ca/like_protocol")
+                                .post(requestBody)
+                                .build();
+                        client.newCall(request).enqueue(new Callback() {
+                            Handler mainHandler = new Handler(ProtocolActivity.this.getMainLooper());
                             @Override
-                            public void run() {
-                                Toast.makeText(ProtocolActivity.this, "Added to Favourites", Toast.LENGTH_SHORT).show();
+                            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                                mainHandler.post(new Runnable(){
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(ProtocolActivity.this, "Failed to add to Favourites", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                                mainHandler.post(new Runnable(){
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(ProtocolActivity.this, "Added to Favourites", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+                                uiHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ImageButton favorite_button = findViewById(R.id.action_favorite);
+                                        favorite_button.setImageResource(R.drawable.filled_heart_image);
+                                    }
+                                });
                             }
                         });
+
                     }
-                });
+                }).start();
+
+
                 break;
             case R.id.action_sort:
                 OkHttpClient sort_client = new OkHttpClient();
