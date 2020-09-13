@@ -92,6 +92,7 @@ public class ProtocolActivity extends AppCompatActivity {
                                 .header("token", token)
                                 .header("protocol", referencingProtocol.getName())
                                 .header("username", username)
+                                .header("link", referencingProtocol.getProtocolUrl())
                                 .url("https://www.philippeyu.ca/like_protocol")
                                 .post(requestBody)
                                 .build();
