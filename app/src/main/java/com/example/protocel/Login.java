@@ -37,7 +37,6 @@ public class Login extends AsyncTask<ArrayList<String>, Integer, JSONObject> {
 
 
         String authToken = "Basic " + encodedString;
-        writeToFile(username, encodedString, LOGIN_FILE, mcontext);
 
         OkHttpClient client = new OkHttpClient();
         RequestBody requestBody = new FormBody.Builder()
@@ -63,6 +62,8 @@ public class Login extends AsyncTask<ArrayList<String>, Integer, JSONObject> {
         }
         try {
             JSONObject loginResponseJSON = new JSONObject(loginResponse[0]);
+            String token = loginResponseJSON.getString("token");
+            writeToFile(username, token, LOGIN_FILE, mcontext);
             return loginResponseJSON;
 
         } catch (JSONException e){

@@ -14,11 +14,11 @@ public class Protocols implements Serializable {
     private Boolean confirmedInLiterature;
 
     public Protocols (JSONObject protocol) {
-        this.confirmedInLab = false;
-        this.confirmedInLiterature = true;
         try {
             this.name = protocol.getString("name");
             this.protocolUrl = protocol.getString("url");
+            this.confirmedInLab = protocol.getBoolean("confirmedInLab");
+            this.confirmedInLiterature = protocol.getBoolean("confirmedInBooks");
         }
         catch (JSONException e){
             e.printStackTrace();
