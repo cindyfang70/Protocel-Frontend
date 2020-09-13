@@ -67,11 +67,10 @@ public class FavoritesAsyncTask extends AsyncTask<String, String, ArrayList<Prot
 
         try {
             JSONArray favoritesResponseJSON = new JSONArray(jsonBody);
-            JSONArray actualData = favoritesResponseJSON.getJSONArray(0);
             ArrayList<Protocols> protocolArray = new ArrayList<>();
 
-            for (int i = 0; i < actualData.length(); i++) {
-                JSONObject protocolData = actualData.getJSONObject(i);
+            for (int i = 0; i < favoritesResponseJSON.length(); i++) {
+                JSONObject protocolData = favoritesResponseJSON.getJSONObject(i);
                 Protocols p = new Protocols(protocolData);
                 protocolArray.add(p);
             }
